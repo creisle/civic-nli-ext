@@ -1,0 +1,49 @@
+#civic-nli-insert {
+  width: 100%;
+  height: fit-content;
+}
+
+#civic-nli-insert h3 {
+  font-size: 2rem;
+}
+
+#civic-nli-insert li {
+  display: inline-block;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+
+#civic-nli-insert blockquote {
+  border-left: 2px solid #ccc;
+  margin-left: 3rem;
+  padding: 0.5em 10px;
+  padding-bottom: 0;
+  font-size: small;
+  max-width: 700px;
+  margin-bottom: 0;
+}
+
+#civic-nli-insert blockquote span.connector {
+  color: #ccc;
+}
+
+#civic-nli-insert blockquote:before {
+  color: #ccc;
+  content: "\201C";
+  font-family: serif;
+  font-size: 4em;
+  line-height: 0.1rem;
+  margin-right: 0.25rem;
+  vertical-align: -2rem;
+}
+
+
+#civic-nli-insert blockquote p {
+  display: inline;
+}
+
+#civic-nli-insert .blockquote-author {
+  color: #8e8e8e;
+  font-size: x-small;
+  text-align: right;
+}

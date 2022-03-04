@@ -1,0 +1,32 @@
+{
+    "name": "CIViC-NLI",
+    "description": "",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "tabs"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://civicdb.org/events/genes/*/summary/variants/*/summary/evidence/*"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "insert.css"
+            ],
+            "matches": [
+                "https://civicdb.org/*"
+            ]
+        }
+    ]
+}
