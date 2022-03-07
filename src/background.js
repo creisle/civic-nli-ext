@@ -89,19 +89,33 @@ const groupAnnotations = (annotations) => {
 
 
 
-
-const fetchAnnotationsById = async (evidenceId) => {
+const pageFetchAnnotations = async (tag) => {
   const headers = new Headers();
   headers.append('Authorization', `Bearer ${API_KEY}`);
-  const annotationsById = {};
-  for (const tagPrefix of ['eid', 'eid:']) {
-    const url = new URL(BASE_URL);
-    const params = { group: GROUP_ID, tag: `${tagPrefix}${evidenceId}` };
+  const url = new URL(BASE_URL);
+  let total = null;
+  const result = [];
+  while (total === null || result.length < total) {
+    const params = { group: GROUP_ID, tag , limit: 200, offset: result.length };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
     const opt = { method: 'GET', headers: headers, mode: 'cors' };
     const resp = await fetch(url, opt);
-    const result = await resp.json();
-    result.rows.forEach((row) => {
+    const content = await resp.json();
+    result.push(...content.rows);
+    if (total === null) {
+      total = content['total'];
+    }
+  }
+  return result;
+}
+
+
+
+const fetchAnnotationsById = async (evidenceId) => {
+  const annotationsById = {};
+  for (const tagPrefix of ['eid', 'eid:']) {
+    const rows = await pageFetchAnnotations(`${tagPrefix}${evidenceId}`);
+    rows.forEach((row) => {
       annotationsById[row['id']] = row;
     })
   }
