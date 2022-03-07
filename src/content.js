@@ -58,12 +58,12 @@ waitForElm('evidence-summary').then((element) => {
         ].forEach(([title, filterFunc]) => {
             const content = [];
             response.filter(filterFunc).forEach((annotation) => {
-                const exampleTitle = annotation['exampleId'] === 'statement'
+                const exampleTitle = annotation.exampleId === 'statement'
                     ? ''
                     : `<p>
-                        <em>Example:${annotation['exampleId']}</em>
+                        <em>Example:${annotation.exampleId}</em>
                         ${annotation.status === 'NEI' ? '(NEI)' : ''}
-                        <span class="blockquote-author">${annotation['user']}</span>
+                        <span class="blockquote-author">${annotation.user}</span>
                       </p>`;
                 content.push(
                     `<li>
@@ -71,7 +71,7 @@ waitForElm('evidence-summary').then((element) => {
                         <blockquote>
                             ${annotation['text'].join(' <span class="connector"> [...] </span> ')}
                         </blockquote>
-
+                        <a class="annotation-source"target="_blank" rel="noopener" href="${annotation.sourceUri}">${annotation.sourceUri.replace(/\/\s*$/, '')}</a>
                     </li>`
                 )
             });

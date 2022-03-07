@@ -47,3 +47,10 @@
   font-size: x-small;
   text-align: right;
 }
+
+
+#civic-nli-insert .annotation-source {
+  font-size: x-small;
+  float: right;
+  margin-top: 5px;
+}

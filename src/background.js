@@ -1,5 +1,5 @@
-const API_KEY = 'YOUR_KEY_HERE';
-const GROUP_ID = 'GROUP_ID';
+const API_KEY = '6879-c6r-RVDIEFvCmA7pjrBUCE-GBUoJUULkpAJWTu2iApw';
+const GROUP_ID = 'JRwd19vg';
 const BASE_URL = 'https://api.hypothes.is/api/search';
 
 
@@ -68,6 +68,7 @@ const groupAnnotations = (annotations) => {
         status: parseStatus(tag),
         text,
         pos,
+        sourceUri: annotation['uri']
         });
     }
   }
@@ -75,11 +76,11 @@ const groupAnnotations = (annotations) => {
   const grouped = {};
 
   selections.sort((s1, s2) => (s1['pos'] - s2['pos'])).forEach(({
-    evidenceId, user, exampleId, status, text
+    evidenceId, user, exampleId, status, text, sourceUri
   }) => {
     const key = JSON.stringify({evidenceId, user, exampleId, status});
     if (grouped[key] === undefined) {
-      grouped[key] = {evidenceId, user, exampleId, status, text: []};
+      grouped[key] = {evidenceId, user, exampleId, status, text: [], sourceUri};
     }
     grouped[key].text.push(text);
   });
