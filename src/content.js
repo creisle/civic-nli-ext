@@ -58,20 +58,30 @@ waitForElm('evidence-summary').then((element) => {
         ].forEach(([title, filterFunc]) => {
             const content = [];
             response.filter(filterFunc).forEach((annotation) => {
+
+                let nliComment = (annotation.comments || []).map(comment => ` ${comment} `).join(' ')
+                if (nliComment) {
+                    nliComment = `<div class="tooltip"> 💬 <div class="tooltiptext">${nliComment}</div></div>`;
+                }
                 const exampleTitle = annotation.exampleId === 'statement'
                     ? ''
                     : `<p>
-                        <em>Example:${annotation.exampleId}</em>
+                        <em>Example:</em>
                         ${annotation.status === 'NEI' ? '(NEI)' : ''}
-                        <span class="blockquote-author">${annotation.user}</span>
+                        <span class="blockquote-author">${annotation.user} ex:${annotation.exampleId} </span>
+                        ${nliComment}
                       </p>`;
+
+
                 content.push(
-                    `<li>
-                        ${exampleTitle}
+                    `<li class="annotation">
+                        <div class="annotation__header">
+                            ${exampleTitle}
+                        </div>
                         <blockquote>
                             ${annotation['text'].join(' <span class="connector"> [...] </span> ')}
                         </blockquote>
-                        <a class="annotation-source"target="_blank" rel="noopener" href="${annotation.sourceUri}">${annotation.sourceUri.replace(/\/\s*$/, '')}</a>
+                        <a class="annotation__source" target="_blank" rel="noopener" href="${annotation.sourceUri}">${annotation.sourceUri.replace(/\/\s*$/, '')}</a>
                     </li>`
                 )
             });

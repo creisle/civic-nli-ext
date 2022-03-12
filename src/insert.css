@@ -47,10 +47,38 @@
   font-size: x-small;
   text-align: right;
 }
+#civic-nli-insert .annotation__header {
+  display: flex;
+}
 
-
-#civic-nli-insert .annotation-source {
+#civic-nli-insert .annotation__source {
   font-size: x-small;
   float: right;
   margin-top: 5px;
+}
+
+#civic-nli-insert .tooltip {
+  position: relative;
+  display: inline-block;
+  opacity: 1;
+}
+
+/* Tooltip text */
+#civic-nli-insert .tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+#civic-nli-insert .tooltip:hover .tooltiptext {
+  visibility: visible;
 }
