@@ -1,6 +1,4 @@
 const origin = 'http://127.0.0.1:8000';
-const API_KEY = '6879-c6r-RVDIEFvCmA7pjrBUCE-GBUoJUULkpAJWTu2iApw';
-const GROUP_ID = 'JRwd19vg';
 const BASE_URL = 'https://api.hypothes.is/api';
 
 const DEFAULT_DELAY = 2500;
