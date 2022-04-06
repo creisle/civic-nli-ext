@@ -1,4 +1,4 @@
-const API_KEY = '6879-c6r-RVDIEFvCmA7pjrBUCE-GBUoJUULkpAJWTu2iApw';
+const API_KEY = 'YOUR_API_KEY';
 const GROUP_ID = 'JRwd19vg';
 const BASE_URL = 'https://api.hypothes.is/api/search';
 
