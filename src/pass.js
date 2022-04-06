@@ -1,0 +1,2 @@
+const API_KEY = 'YOUR_API_KEY';
+const GROUP_ID = 'YOUR_GROUP_ID';

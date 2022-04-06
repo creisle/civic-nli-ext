@@ -1,5 +1,9 @@
-const API_KEY = 'YOUR_API_KEY';
-const GROUP_ID = 'YOUR_GROUP_ID';
+try {
+  importScripts('/pass.js');
+} catch (e) {
+  console.error(e);
+}
+
 const BASE_URL = 'https://api.hypothes.is/api/search';
 
 
