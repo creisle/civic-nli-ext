@@ -19,7 +19,7 @@ const styles = `
 }
 
 #civic-nli-insert h3 {
-    padding-left: 5px;
+    padding: 4px 8px;
     background-color: #fafafa;
     font-size: inherit;
 }
@@ -187,39 +187,42 @@ const evidenceId = parseEvidenceId();
 const css = chrome.runtime.getURL("insert.css");
 
 waitForElm('cvc-evidence-summary').then((element) => {
-    element.insertAdjacentHTML('afterbegin',
-        `
-    <style>
-        ${styles}
-    </style>
-    <div id="civic-nli-insert">
-        <h3>Select Source Quotations/Annotations</h3>
-        <div class="content"></div>
-    </div>
-    `
-    );
+
 
 
     // alert(`parsed evidence id ${evidenceId}`);
     console.log('sending message to background.js', { evidenceId })
     chrome.runtime.sendMessage({ evidenceId }, (response) => {
-        console.log(response);
-        [
-            ['Main Annotation Examples', (ann) => (ann.exampleId !== 'statement' && ann.status !== 'NEI'), 'These represent selected quotes from the paper which should be sufficient evidence for the core civic elements (disease, drug, gene, variant, significance). These selections should be sufficient to judge the paper does indeed say what is stated in the civic core elements. '],
-            ['Statement Context', (ann) => (ann.exampleId === 'statement'), 'These selected quotes are any useful content that that is necessary to support the evidence summary text description that is not necessary in covering the core elements'],
-            ['NEI Annotations', (ann) => (ann.exampleId !== 'statement' && ann.status === 'NEI'), 'These examples are considered to be insufficient to support the core elements of the civic evidence item either because they are missing information, are not specific enough, or they are unrelated to the current evidence item']
-        ].forEach(([title, filterFunc, description]) => {
-            const content = [];
-            response.filter(filterFunc).forEach((annotation) => {
-                content.push(annotationExampleElement(annotation))
+        if (response.length) {
+            element.insertAdjacentHTML('afterbegin',
+                `
+                <style>
+                    ${styles}
+                </style>
+                <div id="civic-nli-insert">
+                    <h3>Select Source Quotations/Annotations</h3>
+                    <div class="content"></div>
+                </div>
+                `
+            );
+            console.log(response);
+            [
+                ['Main Annotation Examples', (ann) => (ann.exampleId !== 'statement' && ann.status !== 'NEI'), 'These represent selected quotes from the paper which should be sufficient evidence for the core civic elements (disease, drug, gene, variant, significance). These selections should be sufficient to judge the paper does indeed say what is stated in the civic core elements. '],
+                ['Statement Context', (ann) => (ann.exampleId === 'statement'), 'These selected quotes are any useful content that that is necessary to support the evidence summary text description that is not necessary in covering the core elements'],
+                ['NEI Annotations', (ann) => (ann.exampleId !== 'statement' && ann.status === 'NEI'), 'These examples are considered to be insufficient to support the core elements of the civic evidence item either because they are missing information, are not specific enough, or they are unrelated to the current evidence item']
+            ].forEach(([title, filterFunc, description]) => {
+                const content = [];
+                response.filter(filterFunc).forEach((annotation) => {
+                    content.push(annotationExampleElement(annotation))
+                });
+                if (content.length) {
+                    document.querySelector('#civic-nli-insert > .content').insertAdjacentHTML('beforeend',
+                        `<h4>${title}</h4>
+                        <p>${description}</p>
+                        <div class='examples'>${content.join('')}</div>`
+                    );
+                }
             });
-            if (content.length) {
-                document.querySelector('#civic-nli-insert > .content').insertAdjacentHTML('beforeend',
-                    `<h4>${title}</h4>
-                    <p>${description}</p>
-                    <div class='examples'>${content.join('')}</div>`
-                );
-            }
-        });
+        }
     });
 });
