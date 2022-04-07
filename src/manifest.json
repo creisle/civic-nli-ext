@@ -12,7 +12,8 @@
     "content_scripts": [
         {
             "matches": [
-                "https://civicdb.org/events/genes/*/summary/variants/*/summary/evidence/*"
+                "https://civicdb.org/events/genes/*/summary/variants/*/summary/evidence/*",
+                "https://staging.civicdb.org/evidence/**"
             ],
             "js": [
                 "content.js"

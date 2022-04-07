@@ -1,6 +1,8 @@
 #civic-nli-insert {
   width: 100%;
   height: fit-content;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
 #civic-nli-insert h3 {
@@ -29,7 +31,7 @@
 
 #civic-nli-insert blockquote:before {
   color: #ccc;
-  content: '\201C';
+  /* content: '\201C'; */
   font-family: serif;
   font-size: 4em;
   line-height: 0.1rem;
