@@ -114,7 +114,7 @@ const styles = `
 
 const parseEvidenceId = () => {
     const url = window.location.href;
-    const match = /.*\/evidence\/(\d+)\/.*/.exec(url);
+    const match = /.*\/evidence\/(\d+)\b.*/.exec(url);
     return match[1];
 };
 
