@@ -1,0 +1,18 @@
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: create zip
+        run: |
+          mkdir assets
+          zip -r assets/civic-nli-ext.zip src
+      - name: Upload assets to a Release
+        uses: AButler/upload-release-assets@v2.0
+        with:
+          files: 'assets/*'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
