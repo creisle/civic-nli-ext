@@ -1,6 +1,6 @@
 {
     "name": "CIViC-NLI",
-    "description": "",
+    "description": "Chrome extension to display Hypothes.is NLI annotations in the CIViC interface",
     "version": "1.1",
     "manifest_version": 3,
     "background": {
