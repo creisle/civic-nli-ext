@@ -22,9 +22,13 @@ Next load the extension unpacked
 
 ![load unpacked](./images/chrome-load-unpacked.png)
 
-Select the `src` folder of this repository. You should now see a new extension at the top of the page
+Select the `src` folder of this repository. You should now see a new extension at the top of the page.
 
 ![new ext](./images/chrome-new-ext.png)
+
+To add your credentials, you will need to  click on the extension icon on the top-right of your browser. You can do this from the extensions drop down menu but it is simpler if you pin the extension so that it shows up and then click on it.
+
+![load unpacked](./images/ext-panel.png)
 
 Click on the extension icon to input your hypothes.is credentials
 
