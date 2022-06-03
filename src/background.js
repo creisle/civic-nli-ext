@@ -1,10 +1,15 @@
-try {
-  importScripts('/pass.js');
-} catch (e) {
-  console.error(e);
-}
-
 const BASE_URL = 'https://api.hypothes.is/api/search';
+
+const icons = {
+  active: {
+    16: 'icons/active-favicon-16x16.png',
+    32: 'icons/active-favicon-32x32.png',
+  },
+  inactive: {
+    16: 'icons/inactive-favicon-16x16.png',
+    32: 'icons/inactive-favicon-32x32.png',
+  },
+};
 
 
 const parseExample = (tagName) => {
@@ -37,7 +42,6 @@ const parseStatus = (tagName) => {
 
 
 const parseSelectedText = (annotation) => {
-  console.log('parseSelectedText', annotation)
   let pos;
   let text;
   for (const target of annotation['target'] || []) {
@@ -81,6 +85,31 @@ const parseCommentsByTags = (annotation) => {
   }
   return result;
 };
+
+
+
+const setInStorage = (payload) => {
+  return new Promise((resolve, reject) => {
+    const data = {};
+    Object.entries(payload).forEach(([key, value]) => {
+      data[key] = btoa(value);
+    })
+    chrome.storage.local.set(data, resolve);
+  });
+}
+
+const getKeyFromStorage = async (key) => {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(key, (result) => {
+      resolve(result[key])
+    });
+  });
+}
+
+const getFromStorage = async (keys) => {
+  const values = await Promise.all(keys.map(key => getKeyFromStorage(key)));
+  return values.map(v => (v ? atob(v) : v));
+}
 
 
 const groupAnnotations = (annotations) => {
@@ -132,12 +161,14 @@ const groupAnnotations = (annotations) => {
 
 const pageFetchAnnotations = async (tag) => {
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${API_KEY}`);
+
+  const [hyp, group] = await getFromStorage(['hyp_key', 'hyp_group']);
+  headers.append('Authorization', `Bearer ${hyp}`);
   const url = new URL(BASE_URL);
   let total = null;
   const result = [];
   while (total === null || result.length < total) {
-    const params = { group: GROUP_ID, tag, limit: 200, offset: result.length };
+    const params = { group, tag, limit: 200, offset: result.length };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
     const opt = { method: 'GET', headers: headers, mode: 'cors' };
     const resp = await fetch(url, opt);
@@ -164,11 +195,44 @@ const fetchAnnotationsById = async (evidenceId) => {
 }
 
 
+const setIconState = (checked) => {
+  // get active tab on current window
+  chrome.tabs.query({ active: true, currentWindow: true }, function (arrayOfTabs) {
+    // the return value is an array
+    var activeTab = arrayOfTabs[0];
+    if (!activeTab) return;
+
+    // set the icon state
+    if (checked) {
+      chrome.action.setIcon({ path: icons.active, tabId: activeTab.id, });
+    } else {
+      chrome.action.setIcon({ path: icons.inactive, tabId: activeTab.id, });
+    }
+
+  });
+};
+
+
 chrome.runtime.onMessage.addListener(
   function (request, sender, sendResponse) {
-    if (request.evidenceId) {
-      fetchAnnotationsById(request.evidenceId).then(sendResponse);
-      return true;
+    if (request.message == 'set') {
+      setInStorage(request.payload).then(sendResponse)
+    } else if (request.message == 'get') {
+      getFromStorage(request.payload).then(sendResponse);
+    } else if (request.evidenceId) {
+      getFromStorage(['hyp_key']).then((result) => {
+        if (!result) {
+          sendResponse({})
+        } else {
+          fetchAnnotationsById(request.evidenceId).then(sendResponse);
+        }
+      })
+    } else if (request.message == 'icon') {
+      setIconState(request.payload);
+
+    } else {
+      return false;
     }
+    return true;
   }
 );

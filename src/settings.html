@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIViC-NLI Settings</title>
+    <style>
+        body {
+            padding-bottom: 10px;
+        }
+
+        h1 {
+            font-size: medium;
+        }
+
+        h2 {
+            font-size: small;
+        }
+
+        .hypothesis .input {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .hypothesis .input input {
+            margin-top: 5px;
+            border: 0.5px solid #c7c7c7;
+            padding: 5px;
+        }
+
+        .warning {
+            font-size: x-small;
+        }
+
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(20px);
+            -ms-transform: translateX(20px);
+            transform: translateX(20px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 20px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CIViC-NLI Settings</h1>
+    <p class="warning">&#9888;Warning: This will store your hypothes.is API key in your browsers storage.
+        This is not encrypted and anyone who uses this machine will also be able to use your credentials.
+        Make sure to logout of chrome or clear these values if this is a public/shared device
+    </p>
+    <h2>Hypothes.is Credentials</h2>
+    <form class="hypothesis">
+        <label class="input">
+            Annotation Group*
+            <input type="hyp_group" name="hyp_group" id="hyp_group" placeholder="Hypothes.is Group ID">
+        </label>
+        <label class="input">
+
+            API key*
+            <input type="hyp_key" name="hyp_key" id="hyp_key" placeholder="Hypothes.is API key">
+        </label>
+        <label>
+            Turn this extension on/off
+            <label class="switch">
+                <input type="checkbox" id="ext_toggle">
+                <span class="slider round"></span>
+              </label>
+        </label>
+    </form>
+    <script src="./settings.js"></script>
+</body>
+
+</html>
