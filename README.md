@@ -1,7 +1,6 @@
 # CIViC NLI Chrome Extension
 
 Chrome Extension for viewing Hypothes.is annotations in-line on CIViC Evidence Items for convenience of annotators.
-This is a prototype only and does not store/add the group or API key for you, future iterations will involve a user form to add these.
 
 - [Testing the Extension](#testing-the-extension)
 - [Get the Hypothes.is Group ID](#get-the-hypothesis-group-id)
@@ -15,8 +14,6 @@ Clone this repository
 git clone https://github.com/creisle/civic-nli-ext.git
 ```
 
-Open the `src/pass.js` file and replace the GROUP_ID and API_KEY fields with their expected content instead of the placeholders. Save this file.
-
 Open the extensions page in chrome `chrome://extensions` and enable developer mode. This will allow you to load the extension
 
 ![dev mode](./images/chrome-dev-mode.png)
@@ -25,9 +22,17 @@ Next load the extension unpacked
 
 ![load unpacked](./images/chrome-load-unpacked.png)
 
-Select the `src` folder of this repository. You should now see a new extension at the top of the page
+Select the `src` folder of this repository. You should now see a new extension at the top of the page.
 
 ![new ext](./images/chrome-new-ext.png)
+
+To add your credentials, you will need to  click on the extension icon on the top-right of your browser. You can do this from the extensions drop down menu but it is simpler if you pin the extension so that it shows up and then click on it.
+
+![load unpacked](./images/ext-panel.png)
+
+Click on the extension icon to input your hypothes.is credentials
+
+![ext credentials](./images/ext-credentials.png)
 
 Now, navigate to the evidence summary page of a CIViC Evidence Item with known annotations. The extension will now display the annotations on the page
 
