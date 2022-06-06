@@ -189,7 +189,7 @@ const fetchAnnotationsById = async (evidenceId) => {
     const rows = await pageFetchAnnotations(`${tagPrefix}${evidenceId}`);
     rows.forEach((row) => {
       annotationsById[row['id']] = row;
-    })
+    });
   }
   return groupAnnotations(Object.values(annotationsById)).filter(a => a.evidenceId == evidenceId);
 }
@@ -226,10 +226,9 @@ chrome.runtime.onMessage.addListener(
         } else {
           fetchAnnotationsById(request.evidenceId).then(sendResponse);
         }
-      })
+      });
     } else if (request.message == 'icon') {
       setIconState(request.payload);
-
     } else {
       return false;
     }

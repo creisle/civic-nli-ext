@@ -111,7 +111,7 @@ const styles = `
 const parseEvidenceId = () => {
     const url = document.location.href;
     const match = /.*\/evidence\/(\d+)\b.*/.exec(url);
-    return match[1];
+    return match ? match[1] : '';
 };
 
 const collapsibleElement = (label, innerHTML) => {
@@ -175,13 +175,13 @@ const setPageContent = async () => {
         if (wrapper) {
             wrapper.remove();
         }
-        return;
+        return false;
     }
     const evidenceId = parseEvidenceId();
     const parentElement = document.querySelector('cvc-evidence-summary');
     const response = await getMessage({ evidenceId });
-    if (!response.length) {
-        return;
+    if (!response.length || !parentElement) {
+        return false;
     }
     const node = document.querySelector('#civic-nli-wrapper');
     if (node == null) {
@@ -215,6 +215,7 @@ const setPageContent = async () => {
             );
         }
     });
+    return true;
 }
 
 // watch for any href changes
@@ -229,6 +230,7 @@ window.onload = function () {
         });
 
     const bodyList = document.querySelector("body");
+    setPageContent()
 
     const observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
