@@ -16,40 +16,40 @@ git clone https://github.com/creisle/civic-nli-ext.git
 
 Open the extensions page in chrome `chrome://extensions` and enable developer mode. This will allow you to load the extension
 
-![dev mode](./images/chrome-dev-mode.png)
+![dev mode](./docs/images/chrome-dev-mode.png)
 
 Next load the extension unpacked
 
-![load unpacked](./images/chrome-load-unpacked.png)
+![load unpacked](./docs/images/chrome-load-unpacked.png)
 
 Select the `src` folder of this repository. You should now see a new extension at the top of the page.
 
-![new ext](./images/chrome-new-ext.png)
+![new ext](./docs/images/chrome-new-ext.png)
 
 To add your credentials, you will need to  click on the extension icon on the top-right of your browser. You can do this from the extensions drop down menu but it is simpler if you pin the extension so that it shows up and then click on it.
 
-![load unpacked](./images/ext-panel.png)
+![load unpacked](./docs/images/ext-panel.png)
 
 Click on the extension icon to input your hypothes.is credentials
 
-![ext credentials](./images/ext-credentials.png)
+![ext credentials](./docs/images/ext-credentials.png)
 
 Now, navigate to the evidence summary page of a CIViC Evidence Item with known annotations. The extension will now display the annotations on the page
 
-![display](./images/civic-nli-annotations.png)
+![display](./docs/images/civic-nli-annotations.png)
 
 ## Get the Hypothes.is Group ID
 
 You can find the relevant group ID by navigating to the group overview page in Hypothesis
 
-![hyp group ID](./images/hyp-group-id.png)
+![hyp group ID](./docs/images/hyp-group-id.png)
 
 ## Get the Hypothes.is API Token
 
 To find your API token, go to the developers page in Hypothes.is
 
-![developers page](./images/hyp-developer.png)
+![developers page](./docs/images/hyp-developer.png)
 
 Generate (or use existing if you have already generated it) and copy the API token
 
-![token](./images/hyp-token.png)
+![token](./docs/images/hyp-token.png)
