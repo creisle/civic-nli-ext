@@ -163,6 +163,9 @@ const pageFetchAnnotations = async (tag) => {
   const headers = new Headers();
 
   const [hyp, group] = await getFromStorage(['hyp_key', 'hyp_group']);
+  if (!hyp || !group) {
+    return [];
+  }
   headers.append('Authorization', `Bearer ${hyp}`);
   const url = new URL(BASE_URL);
   let total = null;

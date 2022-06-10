@@ -169,7 +169,10 @@ const getMessage = (msg) => {
 }
 
 const setPageContent = async () => {
+
     const [ext_toggle] = await getMessage({ message: 'get', payload: ['ext_toggle'] });
+
+
     if (ext_toggle == 'off') {
         const wrapper = document.querySelector('#civic-nli-wrapper');
         if (wrapper) {
@@ -178,9 +181,19 @@ const setPageContent = async () => {
         return false;
     }
     const evidenceId = parseEvidenceId();
+
+    if (!evidenceId) {
+        return false;
+    }
     const parentElement = document.querySelector('cvc-evidence-summary');
     const response = await getMessage({ evidenceId });
-    if (!response.length || !parentElement) {
+
+    if (!response || !response.length) {
+        console.warn('CIViC-NLI ext: Did not set insert. Missing hypothesis response data');
+        return false;
+    }
+    if (!parentElement) {
+        console.warn('CIViC-NLI ext: Did not set insert. Missing parent element');
         return false;
     }
     const node = document.querySelector('#civic-nli-wrapper');
@@ -235,9 +248,13 @@ window.onload = function () {
     const observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
             if (oldHref != document.location.href) {
-                oldHref = document.location.href;
+
                 /* Changed ! your code here */
-                setPageContent()
+                setPageContent().then((result) => {
+                    if (result) {
+                        oldHref = document.location.href;
+                    }
+                })
             }
         });
     });
