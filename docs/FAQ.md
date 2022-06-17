@@ -33,3 +33,7 @@ Yes, but if the same text is available in PMC or PubMed please annotate there in
 ## Can I annotate text to support the Evidence Statement?
 
 In general the goal of this dataset is to select text annotations to be able to fact-check the core fields in a CIViC Evidence item: gene, variant, disease, drug, and clinical significance. However it is often helpful to the reviewer to have other content highlighted which supports the extra information that is capture by the free-text statement (or description). In those cases simply append the `-statement` element to your regular tag to indicate this content is extra to the core fields.
+
+## Can I use the same annotation/selection for multiple evidence items?
+
+Yes, you can simply add more than one tag to the same selection/annotation in hypothes.is. This will apply that selection to each of the evidence items separately.

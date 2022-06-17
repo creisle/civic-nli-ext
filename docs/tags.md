@@ -25,3 +25,16 @@ The following are examples of tags that might be used
 | eid:1234-ex:2            |                          | This indicates this is the second example for some evidence item and is generally only used after the first example (with or without the ex:# tag) has already been added                 |
 | eid:1234-statement       |                          | The selection applies to the evidence statement (description) field of the civic evidence item and does not apply to one of the core fields                                               |
 | eid:1234-ex:2-status:NEI | eid:1234-status:NEI-ex:2 | This is a more complex tag and is used when a second example is given but the example selections do not contain sufficient evidence to support the core fields of the civic evidence item |
+
+## Not Enough Information
+
+Sometimes you will want to highlight text for an evidence item in CIViC where some of the relevant content is not accessible. There are a couple of ways this can come up
+
+- The full text of the article is not in PMC and the specific text of interest is not in the abstract on PubMed
+- The text is inside a figure and is not selectable
+- The text is inside and image-style table and is not selectable
+- The supporting evidence is not explicitly stated but rather only shown in images or supplementary information
+
+In all of the above cases it is particularly useful if you add `-status:NEI` to your evidence ID tags. This will add a status of not enough information (NEI) to the tag and will ensure that when this data set is downloaded we know that the text selected alone is not sufficient to infer/support the CIViC Entry.
+
+You should also add a comment to state why the content is insufficient.

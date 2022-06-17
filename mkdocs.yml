@@ -4,14 +4,16 @@ theme:
   name: material
   favicon: images/active-favicon-32x32.png
   logo: images/active-favicon-32x32.png
+  palette:
+    primary: deep purple
   features:
     - navigation.top
-    # - navigation.sections
+    - navigation.sections
     - navigation.instant
     - toc.integrate
 repo_url: https://github.com/creisle/civic-nli-ext
 repo_name: github
-site_dir: build-docs
+site_dir: dist
 markdown_extensions:
   - codehilite
   - admonition
@@ -30,4 +32,4 @@ extra_javascript:
   - https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js
   - js/table.js
 extra_css:
-  - custom.css
+  - styles.css
