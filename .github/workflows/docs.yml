@@ -25,7 +25,7 @@ jobs:
         python -m pip install --upgrade pip setuptools
         pip install poetry
         poetry install
-    - run: mkdocs build
+    - run: poetry run mkdocs build
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
