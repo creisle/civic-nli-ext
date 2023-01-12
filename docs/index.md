@@ -26,7 +26,8 @@ Our end goal is a dataset where we have 1 or more examples of text that supports
 - Gene
 - Variant
 - Disease
-- Drug
+- Drug/Therapy
 - Clinical Significance
+- Phenotype
 
-Try not to select more than you need but still make sure to keep complete sentences.
+Try not to select more than you need but still make sure to keep complete sentences. It is important to select text which discussed the current manuscript and not background/introductory text referencing other works
