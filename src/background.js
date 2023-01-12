@@ -197,6 +197,13 @@ const fetchAnnotationsById = async (evidenceId) => {
   return groupAnnotations(Object.values(annotationsById)).filter(a => a.evidenceId == evidenceId);
 }
 
+const checkPmcOAStatus = async (pmcid) => {
+  const resp = await fetch(`https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=${pmcid}`);
+  const content = await resp.text();
+  console.log(content)
+  return !content.includes('idIsNotOpenAccess');
+}
+
 
 const setIconState = (checked) => {
   // get active tab on current window
@@ -218,8 +225,24 @@ const setIconState = (checked) => {
 
 chrome.runtime.onMessage.addListener(
   function (request, sender, sendResponse) {
-    if (request.message == 'set') {
-      setInStorage(request.payload).then(sendResponse)
+    if (request.message == 'oa') {
+      if (request.author === true) {
+        setIconState(true);
+      } else {
+        console.log('not author manuscript, check oa status')
+        checkPmcOAStatus(request.payload)
+          .then((status) => {
+            if (status) {
+              setIconState(true);
+            } {
+              setIconState(false);
+            }
+          }).catch((err) => {
+            console.error(err)
+          })
+      }
+    } else if (request.message == 'set') {
+      setInStorage(request.payload).then(sendResponse);
     } else if (request.message == 'get') {
       getFromStorage(request.payload).then(sendResponse);
     } else if (request.evidenceId) {
