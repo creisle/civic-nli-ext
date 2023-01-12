@@ -9,7 +9,7 @@ This project uses chrome extensions to help annotators collect data through a we
 - access to google chrome
 - sign up for a [hypothes.is](https://web.hypothes.is) account
 - install the [hypothes.is chrome extension](https://chrome.google.com/webstore/detail/hypothesis-web-pdf-annota/bjfhmglciegochdpefhhlphglcehbmek?hl=en)
-- install the CIViC-NLI chrome extension: [https://github.com/creisle/civic-nli-ext](https://github.com/creisle/civic-nli-ext)
+- install the [CIViC-NLI chrome extension](https://chrome.google.com/webstore/detail/civic-nli/ibjaklbaahlokfkilllodngidgmjojfl)
 
 Once you have all the following set up, message the project lead to get the hypothes.is annotation group URL to join the private annotation group.
 
