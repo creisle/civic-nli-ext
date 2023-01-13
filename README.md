@@ -5,6 +5,7 @@ Chrome Extension for viewing Hypothes.is annotations in-line on CIViC Evidence I
 - [Testing the Extension](#testing-the-extension)
 - [Get the Hypothes.is Group ID](#get-the-hypothesis-group-id)
 - [Get the Hypothes.is API Token](#get-the-hypothesis-api-token)
+- [Full-text Available in PMC](#full-text-available-in-pmc)
 
 ## Testing the Extension
 
@@ -53,3 +54,11 @@ To find your API token, go to the developers page in Hypothes.is
 Generate (or use existing if you have already generated it) and copy the API token
 
 ![token](./docs/images/hyp-token.png)
+
+## Full-text Available in PMC
+
+When you are highlighting text in PMC if an author manuscript or the fulltext is available for the current article then the civic-nli extension icon will be green.
+
+![green extension icon](./docs/images/extension-green.png)
+
+If it remains grey then the full text of this article is not easily available and annotations on this article is unlikely to make it into the final dataset
