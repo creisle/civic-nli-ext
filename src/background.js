@@ -234,8 +234,10 @@ chrome.runtime.onMessage.addListener(
           .then((status) => {
             if (status) {
               setIconState(true);
-            } {
+              console.log('open access')
+            } else {
               setIconState(false);
+              console.log('NOT open access')
             }
           }).catch((err) => {
             console.error(err)
@@ -254,6 +256,7 @@ chrome.runtime.onMessage.addListener(
         }
       });
     } else if (request.message == 'icon') {
+      console.log('turn off icon')
       setIconState(request.payload);
     } else {
       return false;
